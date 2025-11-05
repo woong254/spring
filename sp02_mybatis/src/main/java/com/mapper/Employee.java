@@ -13,5 +13,4 @@ public class Employee {
 	private String email;
 	private long salary;
 	private Date hireDate;
-	
 }

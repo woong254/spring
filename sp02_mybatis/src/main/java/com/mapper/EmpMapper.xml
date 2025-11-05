@@ -7,12 +7,10 @@
 		FROM EMPLOYEES
 	</select>
 	<select id= "selectone" resultType="map">
-		SELECT employee_id, 
-			   first name,
-			   hire_date,
-			   salary,
-			   email
+		SELECT *
 		FROM EMPLOYEES
 		WHERE EMPLOYEE_ID = #{id}
 	</select>
+	
+
 </mapper>
