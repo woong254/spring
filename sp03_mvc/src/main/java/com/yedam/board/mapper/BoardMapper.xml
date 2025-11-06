@@ -47,14 +47,23 @@
 		 WHERE BNO = ${bno}
 	</update>
 	
-	<delete id="deleteBoard">
+<!-- 	<delete id="deleteBoard">
 		DELETE
 		FROM TBL_BOARD
 		WHERE BNO = ${bno}
-	</delete>
+	</delete> -->
+	
+	<select id="getBoard">
+		select *
+		from tbl_board
+		where bno = ${bno}
+	</select>
 	
 	<select id="count">
 		select count(*) from tbl_board
 	</select>
 	
+	<delete id="deleteBoard" statementType="CALLABLE" parameterType="map">
+		{ call PROC_BOARD_DELETE( #{bno}, #{result, mode=OUT, jdbcType=VARCHAR, javaType=string} )}
+	</delete>
 </mapper>

@@ -1,6 +1,7 @@
 package com.yedam.board.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,12 +14,13 @@ public interface BoardMapper {
 	//수정
 	int updateBoard(BoardVO board);
 	//삭제
-	int deleteBoard(long bno);
+	int deleteBoard(Map<String, Object> map);
 	//단건조회
-	int count();
+	BoardVO getBoard(long bno);
 	//전체조회
 	List<BoardVO> getList();
 	//전체조회(검색)
 	List<BoardVO> getListByWirter(BoardVO board);
 	//페이징-전체건수조회
+	int count();
 }
