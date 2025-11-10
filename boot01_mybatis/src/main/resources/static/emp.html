@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>static/emp.html</title>
+</head>
+<body>
+	<h3>사원 관리</h3>
+<table border="1">
+	<thead>
+		<tr>
+			<th>사원번호</th>
+			<th>이름</th>
+			<th>email</th>
+			<th>급여</th>
+		</tr>
+	</thead>
+	<tbody id ="empList">
+	</tbody>
+</table>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+<script>
+getList();
+function getList(){
+	fetch("/emp")
+	.then(res => res.json())
+	.then(data => {
+		data.forEach(ele => {
+		let newTag = `<tr>
+						<td>${ele.employeeId}</td>
+						<td>${ele.lastName}</td>
+						<td>${ele.email}</td>
+						<td>${ele.salary}</td>
+					 </tr>`;	
+		$("#empList").append(newTag)
+		})
+			
+	});
+};
+
+</script>
+</body>
+</html>
