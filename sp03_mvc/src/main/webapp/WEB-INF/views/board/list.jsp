@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,6 +92,9 @@
   <!-- 상단 타이틀 + 글작성 버튼 -->
   <div class="board-top d-flex justify-content-between align-items-center mb-3">
     <h3 class="board-title-main mb-0">📋 게시글 목록</h3>
+    <my:header></my:header>
+    <my:search></my:search>
+    <div>총게시글수: ${fn:length(list)}</div>
     <button type="button" class="btn btn-write" onclick="location.href='board/register'">
       <span class="me-1">✏️</span> 글 작성
     </button>
@@ -100,7 +105,9 @@
     <div class="board-card">
       <!-- 게시글 헤더 -->
       <div class="board-header d-flex justify-content-between align-items-center">
+      <c:if test="${status.first }"><div>목록시작</div></c:if>
         <div class="d-flex align-items-center gap-2">
+          <div >${status.count }</div>
           <div class="board-title">${board.title}</div>
           <button type="button" class="btn btn-sm btn-outline-primary btn-edit"
             onclick="location.href='board/update?bno=${board.bno}'">
