@@ -24,6 +24,11 @@ public class WebSecurityConfig {
 	}
 
 	@Bean
+	public AuthenticationSuccessHandler authenticationSuccessHandler() {
+		return new CustomLoginSuccessHandler();
+	}
+	
+	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
@@ -31,10 +36,10 @@ public class WebSecurityConfig {
 				.requestMatchers("/admin/*","/empMain*").hasRole("ADMIN")
 				.anyRequest().authenticated()
 			)
-				.formLogin((form) -> form.permitAll().loginPage("/login").usernameParameter("username").successForwardUrl("/board")
+				.formLogin((form) -> form.permitAll().loginPage("/login").usernameParameter("userid").successHandler(authenticationSuccessHandler()))
 		.logout((logout) -> logout.deleteCookies("JSESSIONID").permitAll())
-			.csrf(csrf -> csrf.disable());
-			//.csrf((csrf) -> csrf.ignoringRequestMatchers("/api/*")   );
+		//.csrf(csrf -> csrf.disable())
+		;
 			
 
 		return http.build();
