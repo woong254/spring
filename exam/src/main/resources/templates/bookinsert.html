@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>도서등록</h3>
+<form>
+	<label>도서번호<input id="bookNo" readonly th:value="${no}" ></label><br>
+	<label>도서명<input id="bookName"></label><br>
+	<label>도서표지<input id="bookCoverimg"></label><br>
+	<label>출판일자<input id= "bookDate"></label><br>
+	<label>금액<input id= "bookPrice"></label><br>
+	<label>출판사<input id= "bookPublisher"></label><br>
+	<label>도서소개<input id= "bookInfo"></label><br>
+	<button type="button" id="btn-save">등록</button>
+	<button type="button">조회</button>
+</form>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script>
+var main = { init : function(){
+	var _this = this;
+	$("#btn-save").on("click", function() {
+		_this.save();
+	})
+},
+save : function(){
+	var data = {
+			bookNo : $('#bookNo').val(),
+			bookName : $('#bookName').val(),
+			bookCoverimg : $("#bookCoverimg").val(),
+			bookDate : $('#bookDate').val(),
+			bookPrice : $('#bookPrice').val(),
+			bookPublisher : $("#bookPublisher").val(),
+			bookInfo : $('#bookInfo').val(),
+	};
+	$.ajax({
+		url: "/BookInsert",
+		type: "post",
+		contentType: "application/json",
+		data: JSON.stringify(data)
+	})
+	.done(result => {
+		alert("글이 등록되었습니다.");
+		location.href="/";
+	})
+	.fail(error => {
+		console.log(error);
+	});
+} //end of save
+}; //end of main
+main.init();
+</script>
+</body>
+</html>

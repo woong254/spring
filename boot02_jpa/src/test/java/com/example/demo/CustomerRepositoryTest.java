@@ -47,7 +47,7 @@ public class CustomerRepositoryTest {
 		log.info("조회된	고객	이름:	{}", customerList.get(0).getName());
 	}
 
-	@Disabled
+	//@Disabled
 	@Test
 	public void 고객_수정() {
 		// given- 초기 데이터 저장

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table border="1">
+		<thead>
+			<th>도서번호</th>
+			<th>도서명</th>
+			<th>표지</th>
+			<th>출판일자</th>
+			<th>금액</th>
+			<th>출판사</th>
+			<th>도서소개</th>	
+		</thead>
+		<tbody>
+			<tr th:each="books:${book}">
+				<td th:text="${books.bookNo}"></td>
+				<td th:text="${books.bookName}"></td>
+				<td th:text="${books.bookCoverimg}"></td>
+				<td th:text="${#dates.format(books.bookDate, 'yyyy-MM-dd')}"></td>
+				<td th:text="${books.bookPrice}"></td>
+				<td th:text="${books.bookPublisher}"></td>
+				<td th:text="${books.bookInfo}"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+</body>
+</html>

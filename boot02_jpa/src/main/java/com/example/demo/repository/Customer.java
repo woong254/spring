@@ -1,10 +1,11 @@
 package com.example.demo.repository;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.example.demo.common.BaseTimeEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,8 +14,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Customer {
+public class Customer extends BaseTimeEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
@@ -33,8 +32,6 @@ public class Customer {
 	String name;
 	String phone;
 	String email;
-	@Temporal(TemporalType.TIMESTAMP)
-	LocalDateTime regdate;
 	
 	@OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
 	List<Address> address = new ArrayList <Address>();
